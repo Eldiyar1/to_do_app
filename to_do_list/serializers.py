@@ -15,6 +15,6 @@ class TaskSerializer(serializers.ModelSerializer):
         return title
 
     def validate_description(self, description):
-        if len(description) < 1000:
+        if len(description) > 1000:
             raise ValidationError('description must be less than 1000')
         return description
