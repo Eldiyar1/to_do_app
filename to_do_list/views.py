@@ -1,5 +1,5 @@
-from .models import Task
-from .serializers import TaskSerializer
+from .models import Task, Category, Tag
+from .serializers import TaskSerializer, CategorySerializer, TagSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.pagination import PageNumberPagination
 
@@ -40,6 +40,26 @@ class TaskSearchAPIView(ListAPIView):
             queryset = Task.objects.all()
 
         return queryset
+
+class CategoryListAPIView(ListCreateAPIView):
+    queryset = Category
+    serializer_class = CategorySerializer
+    pagination_class = Paginator
+
+
+class CategoryDetailAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Category
+    serializer_class = CategorySerializer
+
+class TagListAPIView(ListCreateAPIView):
+    queryset = Tag
+    serializer_class = TagSerializer
+    pagination_class = Paginator
+
+
+class TagDetailAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Tag
+    serializer_class = TagSerializer
 
 
 # @api_view(['GET', 'POST'])

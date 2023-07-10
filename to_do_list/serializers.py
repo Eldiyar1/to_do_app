@@ -1,10 +1,24 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+from .models import Task, Category, Tag
 
-from .models import Task
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('name',)
+
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('name',)
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+    tags = TagSerializer(many=True)
+
     class Meta:
         model = Task
         fields = '__all__'
